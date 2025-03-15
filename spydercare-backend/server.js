@@ -78,17 +78,15 @@ app.post('/api/login', (req, res) => {
   // Find the user
   const user = users.find((u) => u.username === username);
 
-  // If user doesn't exist or password doesn't match
+  // If user doesn’t exist or password doesn’t match
   if (!user || user.password !== password) {
     return res.status(401).json({ message: 'Invalid username or password.' });
   }
 
   // If credentials are valid, return a token or success message
-  // In a real app, you'd create a JWT or session to keep track of the user
+  // In a real app, you’d create a JWT or session to keep track of the user
   res.status(200).json({ message: 'Login successful!', user: { username } });
 });
 
-// Start the Server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Export the app for Vercel (remove app.listen)
+module.exports = app;
